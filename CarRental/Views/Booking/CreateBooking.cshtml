@@ -1,0 +1,74 @@
+﻿@model CarRental.Models.Booking
+
+@{
+    ViewData["Title"] = "Confirm Booking";
+    var bookedDatesJson = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.BookedDates);
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<h1>Confirm Booking</h1>
+
+<h4>Booking Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateBooking">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" type="date" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" type="date" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Car</label>
+                <input type="text" class="form-control" value="@ViewBag.CarName" readonly />
+                <input type="hidden" asp-for="CarId" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Confirm Booking" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Bookings</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var bookedDates = @Html.Raw(bookedDatesJson);
+
+                function setupFlatpickr(inputId) {
+                    flatpickr("#" + inputId, {
+                        dateFormat: "Y-m-d",
+                        minDate: "today",
+                        disable: bookedDates,
+                        locale: {
+                            firstDayOfWeek: 1
+                        }
+                    });
+                }
+
+                setupFlatpickr("startDate");
+                setupFlatpickr("endDate");
+            });
+        </script>
+    }
+}

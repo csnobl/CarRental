@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "BookingConfirmation";
+}
+
+<h1>BookingConfirmation</h1>
+
+<div>
+    <h3>Booking for car: @ViewBag.CarBrand</h3>
+    <p>Start Date: @Model.StartDate.ToString("yyyy-MM-dd")</p>
+    <p>End Date: @Model.EndDate.ToString("yyyy-MM-dd")</p>
+    <p>Your booking has been confirmed!</p>
+</div>
+
+<div>
+    <a asp-action="Index">Back to the list of cars</a>
+</div>
+

@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Friberg Car Rentals</h1>
+
+    <!-- Stor bild responsiv bild -->
+    <img src="~/images/logo.png" alt="Car Rental" class="img-fluid w-50 w-sm-25">
+
+    <p>Rent a car qickly and easily! Choose among many cars and book directly online!</p>
+    
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger mt-3">@TempData["ErrorMessage"]</div>
+    }
+
+    @if (Context.Request.Cookies["AuthToken"] == null)
+    {
+        <a class="btn btn-secondary" asp-controller="Login" asp-action="Index">Login</a>
+    }
+    else
+    {
+        <a class="btn btn-secondary" asp-controller="Booking" asp-action="Index">Bookings</a>
+    }
+
+    <a class="btn btn-secondary" asp-area="" asp-controller="CustomerCar" asp-action="Index">Cars to Rent</a>
+
+</div>

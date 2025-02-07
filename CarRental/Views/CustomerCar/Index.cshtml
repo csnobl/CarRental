@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CarRental.Models.Car>
+
+@{
+    ViewData["Title"] = "Cars to Rent";
+}
+
+<h1>Cars to Rent</h1>
+            
+            <div class="container">
+                <div class="row">
+                    @foreach (var car in Model)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <!-- 3 kolumner per rad på medium+ skärmar -->
+                            <div class="card" style="width: 100%;">
+                                <!-- Tar hela kolumnens bredd -->
+                                <img src="@car.ImgUrl" class="card-img-top" alt="Car image">
+                                <div class="card-body">
+                                    <h5 class="card-title">@car.Vintage - @car.Brand</h5>
+                                    <p class="card-text">Price: @car.Price</p>
+                                    <a asp-action="Book" asp-route-id="@car.Id" class="btn btn-primary">Book</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+

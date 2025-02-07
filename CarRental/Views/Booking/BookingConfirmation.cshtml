@@ -1,0 +1,33 @@
+﻿@model CarRental.Models.Booking
+
+@{
+    ViewData["Title"] = "Booking Confirmation";
+}
+
+<h1>Booking Confirmed!</h1>
+
+<div class="alert alert-success">
+    <p>Your booking has been successfully created.</p>
+</div>
+
+<h4>Booking Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Car Brand:</dt>
+            <dd class="col-sm-8">@ViewBag.CarBrand</dd>
+
+            <dt class="col-sm-4">Start Date:</dt>
+            <dd class="col-sm-8">@Model.StartDate.ToShortDateString()</dd>
+
+            <dt class="col-sm-4">End Date:</dt>
+            <dd class="col-sm-8">@Model.EndDate.ToShortDateString()</dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">View My Bookings</a>
+    <a asp-action="Index" asp-controller="Car" class="btn btn-secondary">Book Another Car</a>
+</div>
